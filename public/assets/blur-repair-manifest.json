@@ -1,0 +1,23 @@
+{
+  "basis": "Local concept geometry completion and atmospheric artifact repair; not a new multi-view reconstruction",
+  "assets": {
+    "living": {
+      "originalCount": 1101266,
+      "points": 1132801,
+      "sourceSha256": "34a46c051b00a0f9fb44212e74eb10ee49de9c54f0b2f730c3c9ab2ad0ed9784",
+      "sha256": "f6677601d144881ac5d23d874fb505ed336335504e8c0b0ce12a62adc6fa82f3",
+      "repair": "Flatten only window-return plaster and adjacent floor, close the sparse return using original local plaster samples; add a camera-aligned Three.js distant backdrop only through the window aperture."
+    },
+    "courtyard": {
+      "originalCount": 1048576,
+      "points": 1048576,
+      "sourceSha256": "49f853eac8b866616dc9001df6e5b14de488cdf90a76235db379e6a7bc09e3a8",
+      "sha256": "b9d50ef71a2ef565e2f265cae59e54b04268dbe8752431e45ee8c2c179085a80",
+      "repair": "Replace pale atmospheric streak colours using neighbouring blue-sky samples, and move the remaining distant pale sky onto the same 65m shell as blue sky. Tree and water splats are unchanged."
+    }
+  },
+  "validation": {
+    "offline": "Anisotropic Gaussian renders at the reported window angle and courtyard side angle, plus original camera positions.",
+    "browser": "Not verified: existing browser policy restriction."
+  }
+}

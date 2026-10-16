@@ -1,0 +1,11 @@
+{
+  "method": "Built-in image generation edits, projected as materials onto fixed local 3D bed surfaces",
+  "scope": "Bedroom bed sides and lower bedside cabinet faces, in the existing room coordinate frame",
+  "notClaimed": "This is not a fused multi-camera reconstruction or complete all-angle coverage of the house.",
+  "sourceViews": {
+    "near": {"eye": [-2.8,1.6,3.0], "target": [-3,0.55,0], "verticalFov": 68, "aspect": [1280,880]},
+    "far": {"eye": [-2.8,1.6,-3.0], "target": [-3,0.55,0], "verticalFov": 68, "aspect": [1280,880]}
+  },
+  "validationViews": ["near-side", "far-side", "bed-foot", "reported-oblique", "ceiling", "doorway"],
+  "remainingLimits": ["Original bedding and ornaments retain source reconstruction softness", "Generated material images are approximate appearance completion", "Browser/GPU verification remains blocked by the existing environment restriction"]
+}

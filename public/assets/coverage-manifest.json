@@ -1,0 +1,84 @@
+{
+  "version": 1,
+  "status": "unregistered_concept_previews",
+  "blueprintNavigation": "authoritative",
+  "photorealCoverage": "not_complete_or_seamless",
+  "nodes": [
+    {
+      "id": "bedroom-door",
+      "room": "bedroom",
+      "anchor": {
+        "x": 10.1,
+        "y": 1.6,
+        "z": 3.3
+      },
+      "rotationY": 0,
+      "registration": "concept_anchor_only_unverified",
+      "assetPublicId": "f76cc29b-1594-4bfa-9469-0bb0d197d79d",
+      "bytes": 16525006,
+      "sha256": "6cd1553f43801f8130cc2abd6745cc84a517f9a4c025eed8a7f4f774e4c33a67",
+      "spzHeader": [
+        1347635022,
+        2,
+        1048576,
+        3072
+      ],
+      "generatedNew": true,
+      "panoramaReview": "failed_structural_alignment",
+      "downstreamValidation": "SPZ decoded; GPU and free-translation visual verification incomplete",
+      "release": "candidate_for_reconstruction_test",
+      "url": "/assets/bedroom-door.spz"
+    },
+    {
+      "id": "study-door",
+      "room": "study",
+      "anchor": {
+        "x": 10.1,
+        "y": 1.6,
+        "z": 9.3
+      },
+      "rotationY": -90,
+      "registration": "concept_anchor_only_unverified",
+      "assetPublicId": "28418066-9943-4c6d-abba-8a3e97ffaa2a",
+      "bytes": 16530003,
+      "sha256": "a6abd8e94277a12a5290d7c91dd6183d49e6468629a0ded400073e6c054388e1",
+      "spzHeader": [
+        1347635022,
+        2,
+        1048576,
+        3072
+      ],
+      "generatedNew": true,
+      "panoramaReview": "failed_structural_alignment",
+      "downstreamValidation": "SPZ decoded; GPU and free-translation visual verification incomplete",
+      "release": "candidate_for_reconstruction_test",
+      "url": "/assets/study-door.spz"
+    },
+    {
+      "id": "living-door",
+      "room": "living",
+      "anchor": {
+        "x": 5.8,
+        "y": 1.6,
+        "z": 5.2
+      },
+      "rotationY": 0,
+      "registration": "concept_anchor_only_unverified",
+      "assetPublicId": "cd2ba796-7719-4382-a4be-5664f7a9f350",
+      "bytes": 16568576,
+      "sha256": "82ef03c2391f90b6932cfa005b572e8d87bcb38d1f17f15b1df2c9954dea6c5b",
+      "spzHeader": [
+        1347635022,
+        2,
+        1048576,
+        3072
+      ],
+      "generatedNew": true,
+      "panoramaReview": "failed_structural_alignment_and_floor_boundary",
+      "downstreamValidation": "SPZ decoded; GPU and free-translation visual verification incomplete",
+      "release": "candidate_for_reconstruction_test",
+      "floorFinish": "executed_exact_pixel_composite_but_visual_release_failed",
+      "url": "/assets/living-door.spz"
+    }
+  ]
+}

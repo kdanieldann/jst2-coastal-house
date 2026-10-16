@@ -1,0 +1,23 @@
+{
+  "name": "jst2-coastal-house",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "vite --host 127.0.0.1 --port 5196",
+    "build": "vite build",
+    "test": "node --test tests/*.test.js"
+  },
+  "dependencies": {
+    "@viggle/splat-engine": "0.1.1",
+    "playcanvas": "2.18.0",
+    "three": "0.180.0"
+  },
+  "devDependencies": {
+    "vite": "^8.0.0",
+    "spz-js": "1.2.5"
+  },
+  "engines": {
+    "node": ">=22.12.0"
+  }
+}

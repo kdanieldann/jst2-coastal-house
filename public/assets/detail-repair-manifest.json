@@ -1,0 +1,29 @@
+{
+  "basis": "Local repair of original reconstructed geometry, not a new reconstruction or measured survey",
+  "assets": {
+    "courtyard": {
+      "sourceAssetId": "f7721dc6-bcc2-4621-94e9-c8a7ff3bddf7",
+      "sourceSha256": "b8c24c1556335197b93275dc140d1e243da8d4d1cfb68d25befb1a85383cc353",
+      "sha256": "49f853eac8b866616dc9001df6e5b14de488cdf90a76235db379e6a7bc09e3a8",
+      "beforePoints": 1048576,
+      "afterPoints": 1048576,
+      "maxPositionError": 0.0001220703125,
+      "bytes": 17109434,
+      "repair": "Relocate blue sky above 1.8m to at least 65m radius about the capture eye, preserving angular position and Gaussian footprint. Tree, ground and water are unchanged."
+    },
+    "living": {
+      "sourceAssetId": "bf39462e-90f1-44c3-abc3-5f6104362589",
+      "sourceSha256": "58409651067062a1c7a1a902415cef62f650a1660054e9ebb8ceebc61c0859f2",
+      "sha256": "34a46c051b00a0f9fb44212e74eb10ee49de9c54f0b2f730c3c9ab2ad0ed9784",
+      "beforePoints": 1048576,
+      "afterPoints": 1101266,
+      "maxPositionError": 0.00012111663818359375,
+      "bytes": 16630513,
+      "repair": "Fill missing island side, cabinet base and occluded floor strip from existing concept geometry and photographed material colors. Remove 780 unsupported splats only within the missing-side slab; keep the original floor and remaining furniture."
+    }
+  },
+  "validation": {
+    "offline": "CPU anisotropic Gaussian comparison from reported problem angle and original capture position. Tree occlusion reproduces before repair and disappears after sky-depth correction. Kitchen side closure substantially removes the white void.",
+    "browser": "Not verified: existing browser policy restriction; no alternate browser path used."
+  }
+}

@@ -1,0 +1,15 @@
+{
+  "basis": "Two generated perspective materials mapped to fixed local 3D surfaces; not a fused multi-camera reconstruction",
+  "originalCount": 1048576,
+  "points": 911037,
+  "sourceSha256": "ba8377e4df6dc3aed7c999b732ca8241237f75c41731806ca64c08ec64b16b46",
+  "sha256": "b2b26b023da8453b4c224e88816f8634515cd9046cdaa8dd5223bc25e987a3fb",
+  "changes": [
+    "Level ceiling at the existing room roof height, with straight upper plaster returns",
+    "Complete both bed sides with generated linen and oak detail and close lower bedside cabinet faces; preserve original bed top and foot"
+  ],
+  "validation": {
+    "offline": "Anisotropic Gaussian renders from both sides, bed foot, reported oblique view and ceiling; single shared coordinate frame",
+    "browser": "Not verified: existing browser policy restriction"
+  }
+}

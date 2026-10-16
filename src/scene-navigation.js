@@ -1,0 +1,20 @@
+// Local X/Z envelopes traced from the normalized clouds' body-height projections.
+// A scene exit is an explicit visible portal, never a concept-plan boundary.
+const rect=(x0,z0,x1,z1)=>[[x0,z0],[x1,z0],[x1,z1],[x0,z1]];
+export const sceneEntryPose=()=>({x:0,z:0,yaw:0});
+export const sceneProfiles={
+ living:{polygons:[rect(-5.45,-5.6,5.45,3.25)],obstacles:[[-5.4,-3.9,-4.55,-.1],[-4.1,-1.95,-2.6,-.7],[2.15,-1.3,4.9,.15]],portals:[{id:'living-gallery',x:0,z:3.0,axis:'z',sign:1,half:.8,to:'gallery',arrival:sceneEntryPose()}]},
+ bedroom:{polygons:[[[-4.2,-5.2],[3.75,-5.2],[3.75,3.0],[.85,4.1],[-.85,4.1],[-4.2,3.25]],rect(-.78,3.5,.78,5.05)],obstacles:[[-4.15,-1.43,-1.8,1.43],[-4.5,1.55,-3.92,2.27],[-4.5,-2.3,-3.82,-1.55],[3.45,-.25,3.8,3.0],[2.7,-3.6,3.8,-2.9]],portals:[{id:'bedroom-gallery',x:0,z:4.65,axis:'z',sign:1,half:.68,to:'gallery',arrival:{x:1.15,z:-2,yaw:-Math.PI/2}}]},
+ gallery:{polygons:[[[-2.1,-8.4],[2.15,-8.4],[2.15,-.8],[.85,5.6],[-.7,5.6],[-1.8,.1]],rect(1.5,-3.1,3.2,-1.0)],obstacles:[[-2.1,-4,-1.55,-1.25]],portals:[{id:'gallery-living',x:0,z:5.15,axis:'z',sign:1,half:.55,to:'living',arrival:{x:0,z:2.3,yaw:0}},{id:'gallery-bedroom',x:2.65,z:-2,axis:'x',sign:1,half:.8,to:'bedroom',arrival:{x:0,z:3.4,yaw:0}},{id:'gallery-study',x:0,z:-7.9,axis:'z',sign:-1,half:.75,to:'study',arrival:{x:0,z:4.0,yaw:0}}]},
+ study:{polygons:[[[-3.55,-5.3],[3.25,-5.3],[3.25,.1],[1.75,4.65],[-1.8,4.65],[-3.6,.1]],rect(-.8,4,.8,5.5)],obstacles:[[1.15,-.95,3.25,.15],[-3.5,-.7,-3.05,2.6]],portals:[{id:'study-gallery',x:0,z:5.1,axis:'z',sign:1,half:.7,to:'gallery',arrival:{x:0,z:-7,yaw:Math.PI}},{id:'study-courtyard',x:0,z:-4.85,axis:'z',sign:-1,half:2.8,to:'courtyard',arrival:{x:-.2,z:.45,yaw:0}}]},
+ courtyard:{polygons:[[[-3.65,-4.45],[2.45,-4.45],[3.3,-.5],[3.3,1.45],[-3.7,1.45]],rect(-1.65,1.35,1.25,2.15)],obstacles:[[-2.95,-3.2,-.45,-.35],[0,-3.65,1.6,-2.2]],portals:[{id:'courtyard-study',x:-.2,z:1.82,axis:'z',sign:1,half:1.4,to:'study',arrival:{x:0,z:-4.1,yaw:Math.PI}}]}
+};
+function inside(p,poly){let hit=false;for(let i=0,j=poly.length-1;i<poly.length;j=i++){const a=poly[i],b=poly[j];if(((a[1]>p.z)!==(b[1]>p.z))&&(p.x<(b[0]-a[0])*(p.z-a[1])/(b[1]-a[1])+a[0]))hit=!hit;}return hit;}
+export function sceneWalkable(id,p,r=.12){const s=sceneProfiles[id];if(!s)return false;return [[0,0],[r,0],[-r,0],[0,r],[0,-r]].every(([x,z])=>s.polygons.some(poly=>inside({x:p.x+x,z:p.z+z},poly)))&&!s.obstacles.some(b=>p.x>b[0]-r&&p.x<b[2]+r&&p.z>b[1]-r&&p.z<b[3]+r);}
+export function moveInScene(id,p,dx,dz){let q={x:p.x,z:p.z};const steps=Math.max(1,Math.ceil(Math.hypot(dx,dz)/.05));for(let i=0;i<steps;i++){if(sceneWalkable(id,{x:q.x+dx/steps,z:q.z}))q.x+=dx/steps;if(sceneWalkable(id,{x:q.x,z:q.z+dz/steps}))q.z+=dz/steps;}return q;}
+export function crossedPortal(id,before,after){return sceneProfiles[id].portals.find(d=>{const v=d.axis,other=v==='x'?'z':'x';return (before[v]-d[v])*d.sign<0&&(after[v]-d[v])*d.sign>=0&&Math.abs(after[other]-d[other])<d.half;})??null;}
+export function nearestPortal(id,p){return sceneProfiles[id].portals.reduce((a,b)=>!a||Math.hypot(b.x-p.x,b.z-p.z)<Math.hypot(a.x-p.x,a.z-p.z)?b:a,null);}
+export function localToWorld(p,t){const y=t.rotation.y*Math.PI/180;return {x:t.position.x+Math.cos(y)*p.x+Math.sin(y)*p.z,z:t.position.z-Math.sin(y)*p.x+Math.cos(y)*p.z,y:1.6+t.position.y,yaw:p.yaw-y};}
+export function worldToLocal(p,t){const y=t.rotation.y*Math.PI/180,x=p.x-t.position.x,z=p.z-t.position.z;return {x:Math.cos(y)*x-Math.sin(y)*z,z:Math.sin(y)*x+Math.cos(y)*z,yaw:p.yaw+y};}
+export function mapScenePoint(plan,id,p){const r=id==='courtyard'?plan.courtyard:plan.rooms[id],points=sceneProfiles[id].polygons.flat(),xs=points.map(v=>v[0]),zs=points.map(v=>v[1]);const u=(p.x-Math.min(...xs))/(Math.max(...xs)-Math.min(...xs)),v=(p.z-Math.min(...zs))/(Math.max(...zs)-Math.min(...zs));const turned=id==='study'||id==='courtyard';return {x:r.x+r.w*Math.max(.04,Math.min(.96,turned?1-v:u)),z:r.z+r.h*Math.max(.04,Math.min(.96,turned?u:v)),yaw:p.yaw+(turned?Math.PI/2:0)};}
+export const movementSpeed=running=>running?3.1:1.35;
